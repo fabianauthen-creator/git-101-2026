@@ -21,6 +21,7 @@ Welcome to the Git 101 Workshop! This project is designed to teach Code Network 
   - [Step 7: Push to Your Fork](#step-7-push-to-your-fork)
   - [Step 8: Create a Pull Request](#step-8-create-a-pull-request)
 - [Alternative Workflows](#alternative-workflows)
+  - [Connecting to Github via SSH [Git CLI]](#connecting-to-your-git-repo-via-ssh-using-git-cli)
   - [Using GitHub CLI](#using-github-cli)
   - [Using GitHub Desktop](#using-github-desktop)
 - [Useful Commands Reference](#useful-commands-reference)
@@ -237,6 +238,132 @@ git push
 6. Wait for the maintainer to review and merge your contribution!
 
 ## Alternative Workflows
+
+### Connecting to your Git Repo (via SSH) using Git CLI
+
+- [Check for key](#check-for-key)
+` [Generate SSH key](#generate-ssh-key)
+- [Adding SSH key to Github account](#adding-ssh-key-to-github-account)
+- [Stuck on HTTPS?](#stuck-on-https)
+
+Due to github removing suppport for passowrd authentication, it is recommended to use SSH to connect to your repos. Note: to PR (pull request), you will have to either use the Github CLI or Github Desktop, or from the Github website. Most of the information regarding generating keys and checking keys here is availbale to read at [Connecting to Github with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh). Make sure you've configured your user.name and user.email, information [here](#option-1-git-cli-command-line-interface---recommended-for-learning)
+
+Lets get started.
+#### Check for key
+First check for a SSH key incase you've previously made one at the DEFAULT file location:
+```bash
+ls -al ~/.ssh
+```
+
+This checks the DEFAULT location where your keys are held. Generally the supported filenames of supported public keys for Github (according to Github) are one of the following:
+
+* *id\_rsa.pub*
+
+* *id\_ecdsa.pub*
+
+* *id\_ed25519.pub*
+
+.pub means it is a public key.
+
+**DO NOT SHARE YOUR PRIVATE KEYS!!**
+
+
+### Generate SSH key
+
+Paste the text below, replacing the email used in the example with your GitHub email address.
+
+To generate up a SSH key
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+**Note**
+> If you are using a legacy system that doesn't support the Ed25519 algorithm, use:
+> ```shell
+> ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+> ```
+
+This creates a new SSH key, using the provided email as a label.
+
+
+> When you're prompted to "Enter a file in which to save the key", you can press Enter to accept the default file location, which can be [checked](#check-for-key) or you can supply the default type location (make sure you remember where it is).
+
+Another prompt will be given to type a secure [passphrase](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases). 
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+
+** Congratulations you have now created a SSH key! **
+
+#### Adding SSH key to Github account
+
+After the creation of your SSH key, you must get the contents of your public key.
+
+```bash
+$ cat ~/.ssh/id_ed25519.pub
+# Then select and copy the contents of the id_ed25519.pub file
+# displayed in the terminal to your clipboard
+```
+
+Beware of using `cat` on files, using `cat` for something like a public key is fine (because it's meant to be shared). It will not be explained here, but it is highly recommended to look into the reasons behind it.
+
+
+
+1. In the upper-right corner of any page on GitHub, click your profile picture, then click Settings.
+
+2. In the "Access" section of the sidebar, click SSH and GPG keys.
+
+3. Click New SSH key or Add SSH key.
+
+4. In the "Title" field, add a descriptive label for the new key. For example, if you're using a personal laptop, you might call this key "Personal laptop".
+
+5. Select the type of key, either authentication or signing. For more information about commit signing, see About commit signature verification.
+
+6. In the "Key" field, paste your public key.
+
+7. Click Add SSH key.
+
+8. If prompted, confirm access to your account on GitHub. 
+
+** You now have added your SSH public key to your github account, and can start [staging](#step-5-stage-your-changes), [committing](#step-6-commit-your-changes) and [push](#step-7-push-to-your-fork)**
+
+** When pushing, you will have to supply your passphrase when using SSH, make sure you remember your passphrase otherwise you might have to restart the proccess again **
+
+
+#### Stuck on HTTPS?
+
+If you're still using HTTPS and want to change it so that you are using SSH, do the following:
+
+1. We are going to check what type of url (which is the remote repository, meaning outside your computer) the local git repo (the repository that is on your computer right now) is connected to. Shows the remote repositories connected to your local Git repo, with their URLs. Enter this command to check where and what type of connection it is:
+ ```bash
+ git remote -v
+ ```
+
+This is what your output looks like when you have a HTTPS connection:
+``` bash 
+origin  https://github.com/your_username/repo-name.git (fetch)
+origin  https://github.com/your_username/repo-name.git (push)
+```
+
+
+2. This is what your output looks like when you have a SSH connection:
+```bash
+origin  git@github.com:your_username/repo-name.git (fetch)
+origin  git@github.com:your_username/repo-name.git (push)
+```
+
+To change it to SSH (or vis vera), do the following:
+
+```bash
+git remote remove origin      # removes the origin of the remote repo
+
+git remote add origin ( the ssh address you copied from the green CODE button from the repo page )    #adds the new origin address
+
+# then you can push your code
+
+git push -u origin main       # the -u means it's set upstream, also this command assumes you've already staged and committed your changes
+```
+
+** That's all! **
+
 
 ### Using GitHub CLI
 
