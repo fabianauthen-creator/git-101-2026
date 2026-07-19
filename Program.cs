@@ -3,7 +3,8 @@
     "William Qu",
     "Angus Wong",
     "Ryan Chang",
-    // Add your name above this line with a trailing comma! (Do not delete this)
+    "Mandeep Gautam",
+    // Add your name above this line! (Do not delete this)
 ];
 
 Console.WriteLine("Hello World!");
