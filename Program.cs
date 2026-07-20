@@ -4,6 +4,7 @@
     "Angus Wong",
     "Ryan Chang",
     "Mandeep Gautam",
+    "Annie",
     "Ila Cassagne",
     "Chloe Flintoff",
     "Zara Ho",
