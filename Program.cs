@@ -5,6 +5,7 @@
     "Ryan Chang",
     "Mandeep Gautam",
     "Fabian Authen",
+    "Annie",
     "Ila Cassagne",
     "Chloe Flintoff",
     "Zara Ho",
