@@ -5,6 +5,8 @@
     "Ryan Chang",
     "Mandeep Gautam",
     "Fabian Authen",
+    "Chloe Flintoff",
+    "Zara Ho",
     // Add your name above this line! (Do not delete this)
 ];
 
