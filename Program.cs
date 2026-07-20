@@ -4,6 +4,7 @@
     "Angus Wong",
     "Ryan Chang",
     "Mandeep Gautam",
+    "Ila Cassagne",
     "Chloe Flintoff",
     "Zara Ho",
     // Add your name above this line! (Do not delete this)
